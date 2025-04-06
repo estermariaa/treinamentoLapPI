@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 
+
 def load_sms_spam_dataset(data_path, seed=123):
     """
     Loads the dataset of emails that are categorized into spam and ham
