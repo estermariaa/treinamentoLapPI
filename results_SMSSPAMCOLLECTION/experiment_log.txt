@@ -1,0 +1,107 @@
+[2025-11-14 14:12:09] ========== INICIANDO EXPERIMENTO ==========
+[2025-11-14 14:12:09] Dataset carregado: ../data/smsspamcollection/SMSSpamCollection
+[2025-11-14 14:12:09] Total de linhas carregadas: 5572
+[2025-11-14 14:12:09] Coluna texto: Message | Coluna label: Label
+[2025-11-14 14:12:09] Pré-processando textos...
+[2025-11-14 14:12:40] Total de textos preprocessados: 5572
+[2025-11-14 14:12:40] Classes encontradas: ['ham', 'spam']
+[2025-11-14 14:12:40] 
+================ REPRESENTAÇÃO: TFIDF ================
+[2025-11-14 14:12:40] Representação 'tfidf' gerada.
+[2025-11-14 14:12:40] Dimensão da matriz: (5572, 6825)
+[2025-11-14 14:12:40] Tempo para gerar representação: 30.26s
+[2025-11-14 14:12:40] 
+>>> MODELO: DecisionTree
+[2025-11-14 14:12:40] Executando GridSearchCV...
+[2025-11-14 14:13:01] Melhores parâmetros encontrados: {'criterion': 'gini', 'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2}
+[2025-11-14 14:13:01] Executando Stratified K-Fold...
+[2025-11-14 14:13:04] KFold - Acc média: 0.9655 | F1 média: 0.9248
+[2025-11-14 14:13:04] Executando Holdout (5 repetições)...
+[2025-11-14 14:13:05] Holdout - Acc média: 0.9636 | F1 média: 0.9252
+[2025-11-14 14:13:05] Modelo DecisionTree finalizado em 25.40s
+[2025-11-14 14:13:05] 
+>>> MODELO: KNN
+[2025-11-14 14:13:05] Executando GridSearchCV...
+[2025-11-14 14:13:10] Melhores parâmetros encontrados: {'metric': 'euclidean', 'n_neighbors': 1, 'weights': 'uniform'}
+[2025-11-14 14:13:10] Executando Stratified K-Fold...
+[2025-11-14 14:13:10] KFold - Acc média: 0.9532 | F1 média: 0.8811
+[2025-11-14 14:13:10] Executando Holdout (5 repetições)...
+[2025-11-14 14:13:11] Holdout - Acc média: 0.9485 | F1 média: 0.8746
+[2025-11-14 14:13:11] Modelo KNN finalizado em 5.83s
+[2025-11-14 14:13:11] 
+>>> MODELO: SVM
+[2025-11-14 14:13:11] Executando GridSearchCV...
+[2025-11-14 14:13:27] Melhores parâmetros encontrados: {'C': 10, 'gamma': 0.1, 'kernel': 'rbf'}
+[2025-11-14 14:13:27] Executando Stratified K-Fold...
+[2025-11-14 14:13:31] KFold - Acc média: 0.9804 | F1 média: 0.9559
+[2025-11-14 14:13:31] Executando Holdout (5 repetições)...
+[2025-11-14 14:13:33] Holdout - Acc média: 0.9785 | F1 média: 0.9535
+[2025-11-14 14:13:33] Modelo SVM finalizado em 22.39s
+[2025-11-14 14:13:33] 
+================ REPRESENTAÇÃO: WORD2VEC ================
+[2025-11-14 14:13:34] Representação 'word2vec' gerada.
+[2025-11-14 14:13:34] Dimensão da matriz: (5572, 100)
+[2025-11-14 14:13:34] Tempo para gerar representação: 84.19s
+[2025-11-14 14:13:34] 
+>>> MODELO: DecisionTree
+[2025-11-14 14:13:34] Executando GridSearchCV...
+[2025-11-14 14:14:36] Melhores parâmetros encontrados: {'criterion': 'entropy', 'max_depth': None, 'min_samples_leaf': 4, 'min_samples_split': 2}
+[2025-11-14 14:14:36] Executando Stratified K-Fold...
+[2025-11-14 14:14:40] KFold - Acc média: 0.8927 | F1 média: 0.7717
+[2025-11-14 14:14:40] Executando Holdout (5 repetições)...
+[2025-11-14 14:14:42] Holdout - Acc média: 0.8838 | F1 média: 0.7614
+[2025-11-14 14:14:42] Modelo DecisionTree finalizado em 68.33s
+[2025-11-14 14:14:42] 
+>>> MODELO: KNN
+[2025-11-14 14:14:42] Executando GridSearchCV...
+[2025-11-14 14:14:47] Melhores parâmetros encontrados: {'metric': 'euclidean', 'n_neighbors': 3, 'weights': 'distance'}
+[2025-11-14 14:14:47] Executando Stratified K-Fold...
+[2025-11-14 14:14:47] KFold - Acc média: 0.9230 | F1 média: 0.8362
+[2025-11-14 14:14:47] Executando Holdout (5 repetições)...
+[2025-11-14 14:14:47] Holdout - Acc média: 0.9178 | F1 média: 0.8295
+[2025-11-14 14:14:47] Modelo KNN finalizado em 5.17s
+[2025-11-14 14:14:47] 
+>>> MODELO: SVM
+[2025-11-14 14:14:47] Executando GridSearchCV...
+[2025-11-14 14:14:57] Melhores parâmetros encontrados: {'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}
+[2025-11-14 14:14:57] Executando Stratified K-Fold...
+[2025-11-14 14:15:01] KFold - Acc média: 0.9600 | F1 média: 0.9107
+[2025-11-14 14:15:01] Executando Holdout (5 repetições)...
+[2025-11-14 14:15:01] Holdout - Acc média: 0.9609 | F1 média: 0.9166
+[2025-11-14 14:15:01] Modelo SVM finalizado em 14.12s
+[2025-11-14 14:15:01] 
+================ REPRESENTAÇÃO: FASTTEXT ================
+[2025-11-14 14:15:03] Representação 'fasttext' gerada.
+[2025-11-14 14:15:03] Dimensão da matriz: (5572, 100)
+[2025-11-14 14:15:03] Tempo para gerar representação: 173.45s
+[2025-11-14 14:15:03] 
+>>> MODELO: DecisionTree
+[2025-11-14 14:15:03] Executando GridSearchCV...
+[2025-11-14 14:16:07] Melhores parâmetros encontrados: {'criterion': 'entropy', 'max_depth': None, 'min_samples_leaf': 2, 'min_samples_split': 10}
+[2025-11-14 14:16:07] Executando Stratified K-Fold...
+[2025-11-14 14:16:11] KFold - Acc média: 0.8884 | F1 média: 0.7670
+[2025-11-14 14:16:11] Executando Holdout (5 repetições)...
+[2025-11-14 14:16:13] Holdout - Acc média: 0.8735 | F1 média: 0.7467
+[2025-11-14 14:16:13] Modelo DecisionTree finalizado em 70.14s
+[2025-11-14 14:16:13] 
+>>> MODELO: KNN
+[2025-11-14 14:16:13] Executando GridSearchCV...
+[2025-11-14 14:16:18] Melhores parâmetros encontrados: {'metric': 'euclidean', 'n_neighbors': 3, 'weights': 'distance'}
+[2025-11-14 14:16:18] Executando Stratified K-Fold...
+[2025-11-14 14:16:18] KFold - Acc média: 0.9282 | F1 média: 0.8457
+[2025-11-14 14:16:18] Executando Holdout (5 repetições)...
+[2025-11-14 14:16:18] Holdout - Acc média: 0.9250 | F1 média: 0.8435
+[2025-11-14 14:16:18] Modelo KNN finalizado em 5.12s
+[2025-11-14 14:16:18] 
+>>> MODELO: SVM
+[2025-11-14 14:16:18] Executando GridSearchCV...
+[2025-11-14 14:16:28] Melhores parâmetros encontrados: {'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}
+[2025-11-14 14:16:28] Executando Stratified K-Fold...
+[2025-11-14 14:16:32] KFold - Acc média: 0.9661 | F1 média: 0.9244
+[2025-11-14 14:16:32] Executando Holdout (5 repetições)...
+[2025-11-14 14:16:33] Holdout - Acc média: 0.9630 | F1 média: 0.9199
+[2025-11-14 14:16:33] Modelo SVM finalizado em 14.99s
+[2025-11-14 14:16:33] 
+Experimento concluído!
+[2025-11-14 14:16:33] Tempo total: 263.71s
+

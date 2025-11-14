@@ -1,0 +1,10 @@
+Representation,Model,BestParams,KFold_Accuracy,KFold_F1_Score,Holdout_Accuracy,Holdout_F1_Score
+tfidf,DecisionTree,"{'criterion': 'gini', 'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2}",0.9655405622800075,0.9248330475576225,0.9635874439461883,0.9252185980221462
+tfidf,KNN,"{'metric': 'euclidean', 'n_neighbors': 1, 'weights': 'uniform'}",0.9531566314678608,0.8811042616732646,0.9485201793721973,0.8745951877155231
+tfidf,SVM,"{'C': 10, 'gamma': 0.1, 'kernel': 'rbf'}",0.9804363493626249,0.9558588374098054,0.9784753363228699,0.9535183653707788
+word2vec,DecisionTree,"{'criterion': 'entropy', 'max_depth': None, 'min_samples_leaf': 4, 'min_samples_split': 2}",0.8926725996280638,0.7716672312919818,0.8837668161434976,0.7614221206893647
+word2vec,KNN,"{'metric': 'euclidean', 'n_neighbors': 3, 'weights': 'distance'}",0.9230018082019009,0.8362152084653864,0.9178475336322869,0.8295391462999839
+word2vec,SVM,"{'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}",0.9599772848658006,0.9107238103685166,0.9608968609865471,0.9165710373755699
+fasttext,DecisionTree,"{'criterion': 'entropy', 'max_depth': None, 'min_samples_leaf': 2, 'min_samples_split': 10}",0.8883721678474675,0.767018969396564,0.873542600896861,0.7466784598052344
+fasttext,KNN,"{'metric': 'euclidean', 'n_neighbors': 3, 'weights': 'distance'}",0.928208914885813,0.8457342034869871,0.9250224215246637,0.8434897666882246
+fasttext,SVM,"{'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}",0.9660781966886096,0.9243944227662875,0.9630493273542602,0.9198800835883381
