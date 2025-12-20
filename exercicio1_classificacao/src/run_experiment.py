@@ -13,6 +13,7 @@ from preprocess import preprocess_text
 from representations import get_representation
 from classification_models import arvore_de_decisao, knn, svm_modelo
 from validation import stratified_k_fold, holdout
+from bert_fine_tuning import train_bert_fine_tuning
 
 """
 Pipeline completo para experimentos de classificação de textos em inglês.
@@ -49,7 +50,7 @@ def log(msg):
     print(msg)
 
 def run_experiment(dataset_path, text_col, label_col,
-                   representations=["tfidf", "word2vec", "fasttext"],
+                   representations=["tfidf", "word2vec", "fasttext", "bert"],
                    models=["DecisionTree", "KNN", "SVM"], rodar_finetuning="no"):
     """
     Executa experimentos de classificação de texto combinando múltiplas
@@ -96,8 +97,14 @@ def run_experiment(dataset_path, text_col, label_col,
         # --- 4. Gerar representação ---
         try:
             start_rep = time.time()
-            X, vectorizer = get_representation(rep, texts_clean)
-            rep_time = time.time() - start_time
+            if rep == "bert":
+                log("Gerando embeddings BERT (CLS) — isso pode demorar...")
+                X, _ = get_representation(rep, texts_clean, labels=y)
+                vectorizer = None
+            else:
+                X, vectorizer = get_representation(rep, texts_clean)
+
+            rep_time = time.time() - start_rep
 
             log(f"Representação '{rep}' gerada.")
             log(f"Dimensão da matriz: {X.shape}")
@@ -158,6 +165,19 @@ def run_experiment(dataset_path, text_col, label_col,
                 log(f"ERRO ao treinar modelo {model_name}: {e}")
                 continue
 
+    if rodar_finetuning.lower() == "yes":
+        log("Iniciando Fine-Tuning BERT...")
+        bert_results = train_bert_fine_tuning(texts_clean, y)
+        all_results.append({
+            "representacao": "BERT",
+            "modelo": "Fine-Tuning",
+            "acc": bert_results["accuracy"],
+            "f1": bert_results["f1_macro"],
+            "loss": bert_results["val_loss"],
+            "tempo": bert_results["elapsed"]
+        })
+    else:
+        log("Pulando Fine-Tuning BERT (desabilitado)")
 
     # Salvar resultados
     df = pd.DataFrame(all_results)
@@ -175,13 +195,13 @@ def run_experiment(dataset_path, text_col, label_col,
 if __name__ == "__main__":
 
     run_experiment(
-    dataset_path="../data/smsspamcollection/SMSSpamCollection",
-    label_col="Label",
-    text_col="Message",
-    representations=["tfidf", "word2vec", "fasttext"],
-    models=["DecisionTree", "KNN", "SVM"],
-    rodar_finetuning="no"
-)
+        dataset_path="../data/smsspamcollection/SMSSpamCollection",
+        label_col="Label",
+        text_col="Message",
+        representations=["tfidf", "word2vec", "fasttext"],
+        models=["DecisionTree", "KNN", "SVM"],
+        rodar_finetuning="no"
+    )
 
-    print("\nDica: Para Fine-Tuning BERT, use o script separado 'bert_fine_tuning.py',")
+    print("\nDica: Para Fine-Tuning BERT, preencha a variável 'rodar_finetuning' com 'yes',")
     print("pois ele requer GPU com boa memória.")
